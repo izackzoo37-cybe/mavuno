@@ -66,3 +66,4 @@ invented.
 - Higher-resolution product photography if available
 - The advertisement video in `public/videos/` is ~28 MB. Consider compressing
   it or serving it from a video host before launch for faster page loads
+# mavuno
