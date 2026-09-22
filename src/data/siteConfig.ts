@@ -1,0 +1,33 @@
+// Central site configuration. Edit here to update site-wide values.
+export const siteConfig = {
+  brandName: "Mavuno",
+  productName: "Mavuno Maize Flour",
+  slogan: "Unga Bora, Maisha Bora!",
+  sloganTranslation: "Good Flour, Good Life!",
+  siteUrl: "https://www.mavunomaizeflour.co.ke",
+  defaultDescription:
+    "Mavuno Maize Flour is a premium Grade 1 sifted maize meal, fortified with vitamins and minerals. A product of Kenya.",
+  keywords: [
+    "Mavuno Maize Flour",
+    "Mavuno maize flour Kenya",
+    "Mavuno flour",
+    "maize flour Kenya",
+    "premium maize flour Kenya",
+    "Grade 1 sifted maize meal",
+    "fortified maize flour",
+    "Kenyan maize flour",
+  ],
+  currentYear: new Date().getFullYear(),
+};
+
+export const navLinks = [
+  { label: "Home", path: "/" },
+  { label: "About Us", path: "/about" },
+  { label: "Our Product", path: "/product" },
+  { label: "Quality & Nutrition", path: "/quality-nutrition" },
+  { label: "Manufacturing", path: "/manufacturing" },
+  { label: "Recipes", path: "/recipes" },
+  { label: "News & Events", path: "/news" },
+  { label: "Where to Buy", path: "/where-to-buy" },
+  { label: "Contact", path: "/contact" },
+];
