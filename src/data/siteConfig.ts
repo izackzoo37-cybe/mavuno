@@ -20,6 +20,8 @@ export const siteConfig = {
   currentYear: new Date().getFullYear(),
 };
 
+// Full site link list — used by the footer sitemap, which lists every page
+// including Contact.
 export const navLinks = [
   { label: "Home", path: "/" },
   { label: "About Us", path: "/about" },
@@ -31,3 +33,7 @@ export const navLinks = [
   { label: "Where to Buy", path: "/where-to-buy" },
   { label: "Contact", path: "/contact" },
 ];
+
+// Header primary navigation — excludes "Contact" since the header already
+// carries a dedicated "Contact Us" CTA button that links to the same route.
+export const primaryNavLinks = navLinks.filter((link) => link.path !== "/contact");

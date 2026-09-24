@@ -33,6 +33,8 @@ JSX. Update these files as the client supplies verified information:
 - `certifications.ts` – KEBS and other certification details
 - `manufacturingProcess.ts` – the 10 manufacturing process stages
 - `companyInfo.ts` – About Us copy and the manufacturing overview
+- `siteConfig.ts` – `primaryNavLinks` (8 items, header) vs `navLinks` (9
+  items incl. Contact, used by the footer sitemap)
 - `heroSlides.ts` – the 6 homepage hero slides (badge, heading, description,
   CTAs, background image and focal point). Add, remove or reorder slides here
 - `contactInfo.ts` – phone, WhatsApp, emails, address, social links
