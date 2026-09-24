@@ -33,6 +33,8 @@ JSX. Update these files as the client supplies verified information:
 - `certifications.ts` – KEBS and other certification details
 - `manufacturingProcess.ts` – the 10 manufacturing process stages
 - `companyInfo.ts` – About Us copy and the manufacturing overview
+- `heroSlides.ts` – the 6 homepage hero slides (badge, heading, description,
+  CTAs, background image and focal point). Add, remove or reorder slides here
 - `contactInfo.ts` – phone, WhatsApp, emails, address, social links
 - `locations.ts` – retailer/distributor locations (currently empty)
 - `recipes.ts` – the three official Mavuno recipes. `ingredients`,
@@ -66,4 +68,3 @@ invented.
 - Higher-resolution product photography if available
 - The advertisement video in `public/videos/` is ~28 MB. Consider compressing
   it or serving it from a video host before launch for faster page loads
-# mavuno

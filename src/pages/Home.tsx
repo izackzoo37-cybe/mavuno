@@ -4,6 +4,7 @@ import SectionHeading from "../components/SectionHeading";
 import CTASection from "../components/CTASection";
 import NutritionTable from "../components/NutritionTable";
 import ProcessTimeline from "../components/ProcessTimeline";
+import HeroSlider from "../components/HeroSlider";
 import { siteConfig } from "../data/siteConfig";
 import { productInfo, whyMavuno } from "../data/productInfo";
 import { companyInfo } from "../data/companyInfo";
@@ -30,44 +31,7 @@ export default function Home() {
         }}
       />
 
-      {/* HERO */}
-      <section className="relative bg-forest overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 20%, #F2A900 0, transparent 40%), radial-gradient(circle at 80% 70%, #F2A900 0, transparent 45%)",
-          }}
-          aria-hidden="true"
-        />
-        <div className="container-page relative grid lg:grid-cols-2 gap-12 items-center py-16 lg:py-24">
-          <div className="fade-up">
-            <p className="text-maize-400 font-semibold tracking-wide text-sm">A Product of Kenya</p>
-            <h1 className="mt-4 font-display text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] text-harvest-50">
-              {siteConfig.productName}
-            </h1>
-            <p className="mt-5 font-display italic text-2xl text-maize-400">{siteConfig.slogan}</p>
-            <p className="mt-6 text-harvest-100/90 text-lg leading-relaxed max-w-md">
-              Premium Grade 1 Sifted Maize Meal, fortified with vitamins and minerals.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Button to="/product" variant="primary">
-                Discover Mavuno
-              </Button>
-              <Button to="/contact" variant="ghost" className="!border-harvest-50/30 !text-harvest-50 hover:!border-maize-400 hover:!text-maize-400">
-                Contact Us
-              </Button>
-            </div>
-          </div>
-          <div className="relative flex justify-center lg:justify-end">
-            <img
-              src={productImg}
-              alt="Mavuno Maize Flour, 2kg premium fortified maize meal pack"
-              className="w-full max-w-sm lg:max-w-md drop-shadow-2xl"
-            />
-          </div>
-        </div>
-      </section>
+      <HeroSlider />
 
       {/* BRAND INTRO */}
       <section className="py-20">
