@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { navLinks, siteConfig } from "../data/siteConfig";
 import { contactInfo, socialLinks } from "../data/contactInfo";
+import SocialIcon from "./SocialIcons";
 import logo from "../assets/mavuno-logo.png";
 
 export default function Footer() {
@@ -8,7 +9,7 @@ export default function Footer() {
     <footer className="bg-forest-900 text-harvest-100">
       <div className="container-page py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <img src={logo} alt="Mavuno Maize Flour" className="h-14 w-auto object-contain bg-harvest-50 p-2" />
+          <img src={logo} alt="Mavuno Maize Flour" className="h-14 w-auto object-contain bg-harvest-50 p-2 rounded" />
           <p className="mt-4 text-sm leading-relaxed text-harvest-100/80 max-w-xs">
             {siteConfig.productName} — {siteConfig.slogan}
           </p>
@@ -66,16 +67,19 @@ export default function Footer() {
 
         <div>
           <h3 className="font-display text-lg text-maize-400">Follow Mavuno</h3>
-          <ul className="mt-4 space-y-2 text-sm text-harvest-100/80">
+          <p className="mt-4 text-sm text-harvest-100/70">@mavunomaizeflour on every platform.</p>
+          <ul className="mt-4 flex flex-wrap items-center gap-2.5">
             {socialLinks.map((s) => (
               <li key={s.platform}>
                 <a
                   href={s.url}
-                  className="hover:text-maize-400 transition-colors"
                   target="_blank"
                   rel="noreferrer"
+                  aria-label={`Mavuno Maize Flour on ${s.platform}`}
+                  title={s.platform}
+                  className="flex items-center justify-center w-10 h-10 rounded-full border border-harvest-50/25 text-harvest-100 hover:text-forest-900 hover:bg-maize-400 hover:border-maize-400 transition-colors"
                 >
-                  {s.platform}
+                  <SocialIcon platform={s.platform} />
                 </a>
               </li>
             ))}

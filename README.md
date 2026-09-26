@@ -28,7 +28,9 @@ All business content lives in `src/data/*.ts` — no content is hardcoded inside
 JSX. Update these files as the client supplies verified information:
 
 - `siteConfig.ts` – brand name, slogan, nav links, site URL
-- `productInfo.ts` – product facts, manufacturer details, "Why Mavuno" cards
+- `productInfo.ts` – product facts, manufacturer details, the site-wide
+  "Why Mavuno" cards, the Product-page "Why Mavuno?" features, and
+  `productSizes` (the two real 1kg/2kg packs shown on the Product page)
 - `nutritionInfo.ts` – nutrition table values (per 100 g)
 - `certifications.ts` – KEBS and other certification details
 - `manufacturingProcess.ts` – the 10 manufacturing process stages
@@ -37,11 +39,12 @@ JSX. Update these files as the client supplies verified information:
   items incl. Contact, used by the footer sitemap)
 - `heroSlides.ts` – the 6 homepage hero slides (badge, heading, description,
   CTAs, background image and focal point). Add, remove or reorder slides here
-- `contactInfo.ts` – phone, WhatsApp, emails, address, social links
+- `contactInfo.ts` – phone, WhatsApp, emails, address, social links (rendered
+  as icon links in the footer via `SocialIcons.tsx`)
 - `locations.ts` – retailer/distributor locations (currently empty)
-- `recipes.ts` – the three official Mavuno recipes. `ingredients`,
-  `instructions`, `cookingTime` and `servings` are optional: fill them in and
-  the recipe detail view renders them automatically, no code changes needed
+- `recipes.ts` – all six official Mavuno recipes (title, description, image,
+  category, ingredients, instructions, totalTime, servings). `prepTime` and
+  `cookTime` are optional extra fields for future use
 - `news.ts` – news/event articles: long-form features (`body`, `gallery`,
   `closing`) and video items (`video`, `videoPoster`, `learnMoreLink`)
 

@@ -6,13 +6,13 @@ import NutritionTable from "../components/NutritionTable";
 import ProcessTimeline from "../components/ProcessTimeline";
 import HeroSlider from "../components/HeroSlider";
 import { siteConfig } from "../data/siteConfig";
-import { productInfo, whyMavuno } from "../data/productInfo";
+import { productInfo, productSizes, whyMavuno } from "../data/productInfo";
 import { companyInfo } from "../data/companyInfo";
 import { macronutrients, fortificants, nutritionNote } from "../data/nutritionInfo";
 import { manufacturingStages } from "../data/manufacturingProcess";
 import { newsArticles } from "../data/news";
 import { recipes } from "../data/recipes";
-import productImg from "../assets/mavuno-product.jpeg";
+const productImg = productSizes.find((p) => p.size === "2kg")!.image;
 
 export default function Home() {
   return (
@@ -45,7 +45,7 @@ export default function Home() {
                 productInfo.positioning,
                 productInfo.classification,
                 productInfo.fortificationStatement,
-                `${productInfo.netWeight} Net Weight`,
+                `Available in ${productInfo.netWeight}`,
                 productInfo.origin,
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm">
@@ -69,7 +69,7 @@ export default function Home() {
             />
             <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
               <div>
-                <dt className="text-ink-400">Net Weight</dt>
+                <dt className="text-ink-400">Available Sizes</dt>
                 <dd className="font-semibold">{productInfo.netWeight}</dd>
               </div>
               <div>
@@ -148,7 +148,7 @@ export default function Home() {
         <div className="container-page">
           <SectionHeading title="Made for Great Meals" intro="Enjoy Mavuno ugali with some of Kenya's favorite hearty meals." />
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {recipes.map((recipe) => (
+            {recipes.slice(0, 3).map((recipe) => (
               <div key={recipe.id} className="group bg-white border border-ink/10 overflow-hidden transition-shadow duration-300 hover:shadow-lg">
                 <div className="overflow-hidden aspect-[4/3]">
                   <img

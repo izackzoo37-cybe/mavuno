@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { primaryNavLinks } from "../data/siteConfig";
+import { primaryNavLinks, overlayHeaderRoutes } from "../data/siteConfig";
 import logo from "../assets/mavuno-logo.png";
 
 const SCROLL_THRESHOLD = 24;
@@ -28,8 +28,8 @@ export default function Header() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const { pathname } = useLocation();
 
-  const isHome = pathname === "/";
-  const overlay = isHome && !scrolled;
+  const isOverlayPage = overlayHeaderRoutes.includes(pathname);
+  const overlay = isOverlayPage && !scrolled;
 
   useEffect(() => {
     function onScroll() {
