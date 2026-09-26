@@ -29,8 +29,6 @@ export default function Manufacturing() {
           })),
         }}
       />
-      <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "Manufacturing" }]} />
-
       <section className="relative overflow-hidden">
         {/* Decorative maize-milling photograph — the heading and intro text
             already convey the section's meaning, so the image is treated
@@ -45,7 +43,10 @@ export default function Manufacturing() {
           className="absolute inset-0 bg-gradient-to-r from-forest-900/95 via-forest-900/85 to-forest-900/60"
           aria-hidden="true"
         />
-        <div className="container-page relative py-20 lg:py-28">
+        <div className="relative pt-24 sm:pt-28">
+          <Breadcrumbs items={[{ label: "Home", path: "/" }, { label: "Manufacturing" }]} tone="light" />
+        </div>
+        <div className="container-page relative pt-8 pb-20 lg:pb-28">
           <h1 className="sr-only">Manufacturing — Maize Flour Manufacturing Process</h1>
           <SectionHeading
             tone="light"

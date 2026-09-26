@@ -38,6 +38,6 @@ export const navLinks = [
 // carries a dedicated "Contact Us" CTA button that links to the same route.
 // Routes whose top section is a full-bleed image, so the header should start
 // transparent/overlaid and switch solid on scroll (same treatment as Home).
-export const overlayHeaderRoutes = ["/", "/recipes"];
+export const overlayHeaderRoutes = ["/", "/recipes", "/manufacturing", "/quality-nutrition"];
 
 export const primaryNavLinks = navLinks.filter((link) => link.path !== "/contact");

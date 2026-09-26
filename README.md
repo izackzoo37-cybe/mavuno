@@ -32,11 +32,13 @@ JSX. Update these files as the client supplies verified information:
   "Why Mavuno" cards, the Product-page "Why Mavuno?" features, and
   `productSizes` (the two real 1kg/2kg packs shown on the Product page)
 - `nutritionInfo.ts` – nutrition table values (per 100 g)
-- `certifications.ts` – KEBS and other certification details
 - `manufacturingProcess.ts` – the 10 manufacturing process stages
 - `companyInfo.ts` – About Us copy and the manufacturing overview
 - `siteConfig.ts` – `primaryNavLinks` (8 items, header) vs `navLinks` (9
-  items incl. Contact, used by the footer sitemap)
+  items incl. Contact, used by the footer sitemap); `overlayHeaderRoutes`
+  lists every page whose top section is a full-bleed photo (currently Home,
+  Recipes, Manufacturing, Quality & Nutrition) so the header starts
+  transparent and turns solid on scroll
 - `heroSlides.ts` – the 6 homepage hero slides (badge, heading, description,
   CTAs, background image and focal point). Add, remove or reorder slides here
 - `contactInfo.ts` – phone, WhatsApp, emails, address, social links (rendered
@@ -57,8 +59,10 @@ invented.
 
 ## Still required before launch
 
-- Verified certification numbers/validity and supporting documents (the KEBS
-  and quality marks on the pack are shown but not yet confirmed)
+- Certification numbers/validity and supporting documents — certification
+  content was removed from the Quality & Nutrition page per request; if the
+  KEBS mark should be reinstated once verified, it will need a new home
+  (e.g. the About or Manufacturing page)
 - A Google Maps share/embed link for the Njiru premises
   (`contactInfo.googleMapsUrl` is currently empty and the map block is hidden)
 - Confirmation that all six social accounts (@mavunomaizeflour) are live — the
