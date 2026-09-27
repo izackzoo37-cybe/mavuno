@@ -8,8 +8,10 @@ import recipeBackground from "../assets/recipe-section-background.jpg";
 
 export default function RecipesSection({
   showBreadcrumbs = false,
+  as = "h1",
 }: {
   showBreadcrumbs?: boolean;
+  as?: "h1" | "h2";
 }) {
   const [active, setActive] = useState<Recipe | null>(null);
   const lastFocused = useRef<HTMLElement | null>(null);
@@ -25,7 +27,7 @@ export default function RecipesSection({
   }
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden bg-forest">
       <img
         src={recipeBackground}
         alt=""
@@ -50,9 +52,15 @@ export default function RecipesSection({
           <p className="text-maize-400 font-semibold tracking-wide text-sm uppercase">
             Our Recipes
           </p>
-          <h1 className="mt-3 font-display text-3xl sm:text-4xl text-harvest-50 leading-tight">
-            More Ways to Enjoy Mavuno
-          </h1>
+          {as === "h1" ? (
+            <h1 className="mt-3 font-display text-3xl sm:text-4xl text-harvest-50 leading-tight">
+              More Ways to Enjoy Mavuno
+            </h1>
+          ) : (
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-harvest-50 leading-tight">
+              More Ways to Enjoy Mavuno
+            </h2>
+          )}
           <p className="mt-4 text-base sm:text-lg text-harvest-100/90 leading-relaxed">
             Explore our collection of meal ideas and discover delicious ways to enjoy Mavuno
             Maize Flour.

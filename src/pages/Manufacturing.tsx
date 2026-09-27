@@ -29,7 +29,7 @@ export default function Manufacturing() {
           })),
         }}
       />
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-forest">
         {/* Decorative maize-milling photograph — the heading and intro text
             already convey the section's meaning, so the image is treated
             as decorative background (empty alt). */}

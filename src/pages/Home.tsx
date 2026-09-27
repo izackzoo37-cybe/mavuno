@@ -1,20 +1,36 @@
+import { useNavigate } from "react-router-dom";
 import SEO from "../components/SEO";
 import Button from "../components/Button";
 import SectionHeading from "../components/SectionHeading";
 import CTASection from "../components/CTASection";
-import NutritionTable from "../components/NutritionTable";
-import ProcessTimeline from "../components/ProcessTimeline";
 import HeroSlider from "../components/HeroSlider";
+import Reveal from "../components/Reveal";
+import RecipesSection from "../components/RecipesSection";
+import ProductRangeCard from "../components/ProductRangeCard";
+import NewsCard from "../components/NewsCard";
+import ManufacturingIcon from "../components/ManufacturingIcons";
 import { siteConfig } from "../data/siteConfig";
-import { productInfo, productSizes, whyMavuno } from "../data/productInfo";
+import { productSizes, productFeatures } from "../data/productInfo";
 import { companyInfo } from "../data/companyInfo";
-import { macronutrients, fortificants, nutritionNote } from "../data/nutritionInfo";
-import { manufacturingStages } from "../data/manufacturingProcess";
 import { newsArticles } from "../data/news";
-import { recipes } from "../data/recipes";
+import type { StageIcon } from "../data/manufacturingProcess";
+import qualityHero from "../assets/quality-nutrition-hero.jpg";
+import aboutTeamImage from "../assets/about-team-3.jpg";
+import manufacturingImage from "../assets/manufacturing-hero.jpg";
+import whereToBuyImage from "../assets/hero-availability.jpg";
+
 const productImg = productSizes.find((p) => p.size === "2kg")!.image;
 
+const manufacturingPreviewSteps: { step: string; label: string; icon: StageIcon }[] = [
+  { step: "01", label: "Maize", icon: "sourcing" },
+  { step: "02", label: "Processing", icon: "milling" },
+  { step: "03", label: "Sifting", icon: "sifting" },
+  { step: "04", label: "Packaging", icon: "packaging" },
+  { step: "05", label: "Ready for Your Table", icon: "distribution" },
+];
+
 export default function Home() {
+  const navigate = useNavigate();
   return (
     <>
       <SEO
@@ -33,212 +49,231 @@ export default function Home() {
 
       <HeroSlider />
 
-      {/* BRAND INTRO */}
-      <section className="py-20">
-        <div className="container-page grid lg:grid-cols-[1fr,1.1fr] gap-12 items-start">
-          <SectionHeading title="Quality You Can Trust" />
-          <div className="space-y-4 text-ink-600 leading-relaxed">
-            <p>{companyInfo.aboutCompany}</p>
-            <p>{companyInfo.aboutCompanySecondary}</p>
-            <ul className="grid sm:grid-cols-2 gap-3 mt-4">
-              {[
-                productInfo.positioning,
-                productInfo.classification,
-                productInfo.fortificationStatement,
-                `Available in ${productInfo.netWeight}`,
-                productInfo.origin,
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm">
-                  <span className="mt-1.5 w-1.5 h-1.5 bg-maize shrink-0" aria-hidden="true" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+      {/* ABOUT MAVUNO INTRODUCTION */}
+      <section className="py-14 sm:py-20 lg:py-28 bg-harvest-50">
+        <div className="container-page grid lg:grid-cols-2 gap-12 items-center">
+          <Reveal>
+            <img
+              src={aboutTeamImage}
+              alt="Mavuno staff members holding packs of Mavuno Maize Flour"
+              loading="lazy"
+              className="w-full aspect-[4/3] object-cover rounded-2xl shadow-md"
+            />
+          </Reveal>
+          <Reveal delayMs={120}>
+            <p className="text-mavred font-semibold tracking-wide text-sm uppercase">
+              About Mavuno
+            </p>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-tight">
+              Good Food Starts With Mavuno
+            </h2>
+            <p className="mt-5 text-ink-600 text-lg leading-relaxed max-w-md">
+              {companyInfo.aboutCompany}
+            </p>
+            <div className="mt-8">
+              <Button to="/about" variant="secondary">
+                Discover Mavuno
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* PRODUCT SHOWCASE */}
-      <section className="py-20 bg-white border-y border-ink/10">
-        <div className="container-page grid lg:grid-cols-2 gap-12 items-center">
-          <img src={productImg} alt="Mavuno Maize Flour pack, 2kg" className="w-full max-w-md mx-auto" loading="lazy" />
-          <div>
+      <section className="py-14 sm:py-20 lg:py-28 bg-white border-y border-ink/10">
+        <div className="container-page">
+          <Reveal>
             <SectionHeading
-              title={productInfo.name}
-              intro={`${productInfo.classification} — ${productInfo.fortificationStatement.toLowerCase()}.`}
+              eyebrow="Our Product"
+              title="Mavuno Maize Flour"
+              intro="Quality maize flour made for delicious everyday meals."
             />
-            <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <dt className="text-ink-400">Available Sizes</dt>
-                <dd className="font-semibold">{productInfo.netWeight}</dd>
-              </div>
-              <div>
-                <dt className="text-ink-400">Classification</dt>
-                <dd className="font-semibold">{productInfo.classification}</dd>
-              </div>
-              <div>
-                <dt className="text-ink-400">Origin</dt>
-                <dd className="font-semibold">{productInfo.origin}</dd>
-              </div>
-              <div>
-                <dt className="text-ink-400">Positioning</dt>
-                <dd className="font-semibold">{productInfo.positioning}</dd>
-              </div>
-            </dl>
-            <div className="mt-8">
-              <Button to="/product" variant="secondary">
-                View Product Details
-              </Button>
-            </div>
+          </Reveal>
+          <div className="mt-10 grid sm:grid-cols-2 gap-6 max-w-3xl">
+            {productSizes.map((product, i) => (
+              <Reveal key={product.size} delayMs={i * 100}>
+                <ProductRangeCard product={product} onView={() => navigate("/product")} />
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
       {/* WHY MAVUNO */}
-      <section className="py-20">
+      <section className="py-14 sm:py-20 lg:py-28 bg-harvest-50">
         <div className="container-page">
-          <SectionHeading title="Why Mavuno" align="center" />
+          <Reveal>
+            <SectionHeading eyebrow="Why Mavuno" title="Made For Everyday Meals" align="center" />
+          </Reveal>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whyMavuno.map((item) => (
-              <div key={item.title} className="border-l-4 border-maize pl-5 py-1">
-                <h3 className="font-display text-lg text-ink">{item.title}</h3>
-                <p className="mt-1.5 text-sm text-ink-400">{item.description}</p>
-              </div>
+            {productFeatures.map((feature, i) => (
+              <Reveal key={feature.title} delayMs={i * 80}>
+                <div className="group h-full bg-white border border-ink/10 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-maize/50">
+                  <h3 className="font-display text-lg text-ink">{feature.title}</h3>
+                  <p className="mt-1.5 text-sm text-ink-400 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* QUALITY */}
-      <section className="py-20 bg-forest-50 border-y border-forest-100">
-        <div className="container-page">
-          <SectionHeading title="Quality & Certification" intro={companyInfo.qualityCommitment} />
-        </div>
-      </section>
-
-      {/* NUTRITION */}
-      <section className="py-20">
-        <div className="container-page">
-          <SectionHeading title="Fortification & Nutrition" intro="Values shown per 100 g, as printed on the product packaging." />
-          <div className="mt-10 grid md:grid-cols-2 gap-10">
-            <NutritionTable title="Nutritional Information" rows={macronutrients} />
-            <NutritionTable title="Vitamins & Minerals (min. per 100 g)" rows={fortificants} />
-          </div>
-          <p className="mt-6 text-xs text-ink-400 italic">{nutritionNote}</p>
-        </div>
-      </section>
-
-      {/* MANUFACTURING */}
-      <section className="py-20 bg-white border-y border-ink/10">
-        <div className="container-page">
-          <SectionHeading title="From Maize to Mavuno" intro="An illustrative overview of the milling journey — to be confirmed against Mavuno's actual process." />
-          <div className="mt-12">
-            <ProcessTimeline stages={manufacturingStages.slice(0, 5)} />
-          </div>
-          <div className="mt-6">
-            <Button to="/manufacturing" variant="ghost">
-              See Full Process
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* RECIPES / MEAL IDEAS PREVIEW */}
-      <section className="py-20">
-        <div className="container-page">
-          <SectionHeading title="Made for Great Meals" intro="Enjoy Mavuno ugali with some of Kenya's favorite hearty meals." />
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {recipes.slice(0, 3).map((recipe) => (
-              <div key={recipe.id} className="group bg-white border border-ink/10 overflow-hidden transition-shadow duration-300 hover:shadow-lg">
-                <div className="overflow-hidden aspect-[4/3]">
-                  <img
-                    src={recipe.image}
-                    alt={recipe.imageAlt}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-xl text-ink">{recipe.title}</h3>
-                  <p className="mt-2 text-sm text-ink-400 leading-relaxed">{recipe.description}</p>
-                </div>
+      {/* QUALITY & NUTRITION FEATURE */}
+      <section className="relative overflow-hidden bg-forest">
+        <img
+          src={qualityHero}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover object-[center_25%]"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-forest-900/92 via-forest-900/80 to-forest-900/55"
+          aria-hidden="true"
+        />
+        <div className="relative container-page py-20 sm:py-28">
+          <Reveal>
+            <div className="max-w-xl">
+              <p className="text-maize-400 font-semibold tracking-wide text-sm uppercase">
+                Quality &amp; Nutrition
+              </p>
+              <h2 className="mt-3 font-display text-3xl sm:text-4xl text-harvest-50 leading-tight">
+                Quality You Can Taste.
+                <br />
+                Nutrition You Can Trust.
+              </h2>
+              <p className="mt-4 text-harvest-100/90 text-lg leading-relaxed">
+                Learn more about the quality and nutritional information behind Mavuno Maize
+                Flour.
+              </p>
+              <div className="mt-8">
+                <Button to="/quality-nutrition" variant="primary">
+                  Explore Quality &amp; Nutrition
+                </Button>
               </div>
-            ))}
-          </div>
-          <div className="mt-8">
-            <Button to="/recipes" variant="ghost">
-              View All Recipes
-            </Button>
-          </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* NEWS PREVIEW */}
-      <section className="py-20 bg-forest-50 border-y border-forest-100">
-        <div className="container-page">
-          <SectionHeading title="News & Events" intro="Latest from Mavuno." />
-          <div className="mt-10">
-            {newsArticles.length === 0 ? (
-              <p className="text-ink-400">News and events coming soon.</p>
-            ) : (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {newsArticles.map((article) => (
-                  <div key={article.id} className="bg-white border border-ink/10 overflow-hidden">
-                    <div className="relative aspect-video bg-ink">
-                      {(article.videoPoster ?? article.image) && (
-                        <img
-                          src={article.videoPoster ?? article.image}
-                          alt=""
-                          aria-hidden="true"
-                          className="w-full h-full object-cover"
-                        />
-                      )}
-                      {article.video && (
-                        <span
-                          aria-hidden="true"
-                          className="absolute inset-0 flex items-center justify-center"
-                        >
-                          <span className="w-14 h-14 rounded-full bg-harvest-50/90 flex items-center justify-center text-forest">
-                            <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current ml-0.5">
-                              <path d="M8 5v14l11-7z" />
-                            </svg>
-                          </span>
-                        </span>
-                      )}
-                    </div>
-                    <div className="p-5">
-                      <p className="text-xs uppercase tracking-wide text-mavred font-semibold">
-                        {article.category}
-                      </p>
-                      <h3 className="mt-2 font-display text-lg text-ink">{article.title}</h3>
-                      <p className="mt-1.5 text-sm text-ink-400">{article.summary}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className="mt-8">
-            <Button to="/news" variant="ghost">
-              View News & Events
-            </Button>
-          </div>
+      {/* RECIPES */}
+      <RecipesSection as="h2" />
+
+      {/* MANUFACTURING PREVIEW */}
+      <section className="py-14 sm:py-20 lg:py-28 bg-harvest-50">
+        <div className="container-page grid lg:grid-cols-2 gap-12 items-center">
+          <Reveal>
+            <img
+              src={manufacturingImage}
+              alt="A technician operating the maize milling machine"
+              loading="lazy"
+              className="w-full aspect-[4/3] object-cover rounded-2xl shadow-md"
+            />
+          </Reveal>
+          <Reveal delayMs={120}>
+            <p className="text-mavred font-semibold tracking-wide text-sm uppercase">
+              Our Process
+            </p>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-tight">
+              From Maize To Meal
+            </h2>
+            <p className="mt-4 text-ink-600 leading-relaxed max-w-md">
+              Discover the journey behind Mavuno Maize Flour.
+            </p>
+            <ol className="mt-8 grid grid-cols-5 gap-3">
+              {manufacturingPreviewSteps.map((s) => (
+                <li key={s.step} className="flex flex-col items-center text-center gap-2">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-full bg-forest text-harvest-50 text-xs font-semibold">
+                    {s.step}
+                  </span>
+                  <span className="text-forest">
+                    <ManufacturingIcon name={s.icon} />
+                  </span>
+                  <span className="text-xs font-medium text-ink-600 leading-tight">{s.label}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-8">
+              <Button to="/manufacturing" variant="secondary">
+                Explore Our Process
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* WHERE TO BUY */}
-      <section className="py-20">
+      <section className="py-14 sm:py-20 lg:py-28 bg-white border-y border-ink/10">
+        <div className="container-page grid lg:grid-cols-2 gap-12 items-center">
+          <Reveal className="order-2 lg:order-1">
+            <p className="text-mavred font-semibold tracking-wide text-sm uppercase">
+              Find Mavuno
+            </p>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-tight">
+              Bring Mavuno Home
+            </h2>
+            <p className="mt-4 text-ink-600 leading-relaxed max-w-md">
+              Find out where you can get Mavuno Maize Flour.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button to="/where-to-buy" variant="primary">
+                Where to Buy
+              </Button>
+              <Button to="/contact" variant="ghost">
+                Contact Us
+              </Button>
+            </div>
+          </Reveal>
+          <Reveal delayMs={120} className="order-1 lg:order-2">
+            <img
+              src={whereToBuyImage}
+              alt="Stacked Mavuno Maize Flour stock ready for distribution"
+              loading="lazy"
+              className="w-full aspect-[4/3] object-cover rounded-2xl shadow-md"
+            />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* NEWS & EVENTS */}
+      <section className="py-14 sm:py-20 lg:py-28 bg-harvest-50">
         <div className="container-page">
-          <SectionHeading title="Where to Buy Mavuno" intro="Retailer and distributor information coming soon." />
+          <Reveal>
+            <SectionHeading
+              eyebrow="News & Events"
+              title="What's Happening at Mavuno"
+              intro="Latest updates from the Mavuno team."
+            />
+          </Reveal>
+          {newsArticles.length === 0 ? (
+            <p className="mt-10 text-ink-400">News and events coming soon.</p>
+          ) : (
+            <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {newsArticles.slice(0, 3).map((article, i) => (
+                <Reveal key={article.id} delayMs={i * 100}>
+                  <NewsCard article={article} />
+                </Reveal>
+              ))}
+            </div>
+          )}
           <div className="mt-8">
-            <Button to="/where-to-buy" variant="ghost">
-              Explore Locations
+            <Button to="/news" variant="ghost">
+              View All News &amp; Events
             </Button>
           </div>
         </div>
       </section>
 
-      <CTASection />
+      <CTASection
+        heading="Good Food Starts With Mavuno"
+        text="Explore our products, recipes and discover more about Mavuno Maize Flour."
+        ctaLabel="Explore Our Product"
+        ctaTo="/product"
+        secondaryLabel="Explore Our Recipes"
+        secondaryTo="/recipes"
+      />
     </>
   );
 }

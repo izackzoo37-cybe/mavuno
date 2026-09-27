@@ -58,7 +58,7 @@ export default function QualityNutrition() {
       />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-forest">
         <img
           src={qualityHero}
           alt="A Mavuno staff member holding a pack of Mavuno Maize Flour at the milling facility"

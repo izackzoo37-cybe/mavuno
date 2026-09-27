@@ -37,7 +37,7 @@ JSX. Update these files as the client supplies verified information:
 - `siteConfig.ts` – `primaryNavLinks` (8 items, header) vs `navLinks` (9
   items incl. Contact, used by the footer sitemap); `overlayHeaderRoutes`
   lists every page whose top section is a full-bleed photo (currently Home,
-  Recipes, Manufacturing, Quality & Nutrition) so the header starts
+  About, Recipes, Manufacturing, Quality & Nutrition) so the header starts
   transparent and turns solid on scroll
 - `heroSlides.ts` – the 6 homepage hero slides (badge, heading, description,
   CTAs, background image and focal point). Add, remove or reorder slides here
