@@ -43,6 +43,8 @@ JSX. Update these files as the client supplies verified information:
   CTAs, background image and focal point). Add, remove or reorder slides here
 - `contactInfo.ts` – phone, WhatsApp, emails, address, social links (rendered
   as icon links in the footer via `SocialIcons.tsx`)
+- `whereToBuy.ts` – the Retail and Wholesale content blocks on the Where to Buy
+  page
 - `locations.ts` – retailer/distributor locations (currently empty)
 - `recipes.ts` – all six official Mavuno recipes (title, description, image,
   category, ingredients, instructions, totalTime, servings). `prepTime` and

@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "../components/SEO";
 import Button from "../components/Button";
@@ -5,7 +6,8 @@ import SectionHeading from "../components/SectionHeading";
 import CTASection from "../components/CTASection";
 import HeroSlider from "../components/HeroSlider";
 import Reveal from "../components/Reveal";
-import RecipesSection from "../components/RecipesSection";
+import RecipeCard from "../components/RecipeCard";
+import RecipeModal from "../components/RecipeModal";
 import ProductRangeCard from "../components/ProductRangeCard";
 import NewsCard from "../components/NewsCard";
 import ManufacturingIcon from "../components/ManufacturingIcons";
@@ -13,6 +15,7 @@ import { siteConfig } from "../data/siteConfig";
 import { productSizes, productFeatures } from "../data/productInfo";
 import { companyInfo } from "../data/companyInfo";
 import { newsArticles } from "../data/news";
+import { recipes, type Recipe } from "../data/recipes";
 import type { StageIcon } from "../data/manufacturingProcess";
 import qualityHero from "../assets/quality-nutrition-hero.jpg";
 import aboutTeamImage from "../assets/about-team-3.jpg";
@@ -31,6 +34,19 @@ const manufacturingPreviewSteps: { step: string; label: string; icon: StageIcon 
 
 export default function Home() {
   const navigate = useNavigate();
+  const [activeRecipe, setActiveRecipe] = useState<Recipe | null>(null);
+  const lastFocused = useRef<HTMLElement | null>(null);
+
+  function openRecipe(recipe: Recipe) {
+    lastFocused.current = document.activeElement as HTMLElement | null;
+    setActiveRecipe(recipe);
+  }
+
+  function closeRecipe() {
+    setActiveRecipe(null);
+    lastFocused.current?.focus();
+  }
+
   return (
     <>
       <SEO
@@ -158,8 +174,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* RECIPES */}
-      <RecipesSection as="h2" />
+      {/* RECIPES — one featured recipe, with a route to the full collection */}
+      <section className="py-14 sm:py-20 lg:py-28 bg-white border-y border-ink/10">
+        <div className="container-page grid lg:grid-cols-2 gap-12 items-center">
+          <Reveal>
+            <p className="text-mavred font-semibold tracking-wide text-sm uppercase">
+              Our Recipes
+            </p>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink leading-tight">
+              More Ways To Enjoy Mavuno
+            </h2>
+            <p className="mt-4 text-ink-600 text-lg leading-relaxed max-w-md">
+              Discover delicious meal ideas made to be enjoyed with Mavuno Maize Flour.
+            </p>
+            <div className="mt-8">
+              <Button to="/recipes" variant="secondary">
+                Explore Recipes
+              </Button>
+            </div>
+          </Reveal>
+          <Reveal delayMs={120}>
+            <div className="max-w-md mx-auto lg:mx-0 lg:ml-auto w-full">
+              <RecipeCard recipe={recipes[0]} onView={openRecipe} />
+            </div>
+          </Reveal>
+        </div>
+        {activeRecipe && <RecipeModal recipe={activeRecipe} onClose={closeRecipe} />}
+      </section>
 
       {/* MANUFACTURING PREVIEW */}
       <section className="py-14 sm:py-20 lg:py-28 bg-harvest-50">
