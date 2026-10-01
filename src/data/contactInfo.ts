@@ -1,6 +1,6 @@
 export const contactInfo = {
-  phone: "0726 995 059",
-  phoneTel: "+254726995059",
+  phone: "+254745559245",
+  phoneTel: "+254745559245",
   whatsapp: "0719 833 064",
   whatsappUrl: "https://wa.me/254719833064",
   email: {
